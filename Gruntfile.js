@@ -28,7 +28,8 @@ module.exports = function(grunt) {
         options: {
           removeComments: true,
           collapseWhitespace: true,
-          removeAttributeQuotes: true
+          removeAttributeQuotes: true,
+          removeOptionalTags: true
         },
         files: [
           { expand: true, cwd: 'build/tpl/', src: ['**/*.html'], dest: 'build/tpl-min', ext: '.html' }

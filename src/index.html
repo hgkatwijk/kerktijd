@@ -2,15 +2,15 @@
 <html manifest="app.appcache" lang="nl" itemscope itemtype="http://schema.org/WebApplication">
 <meta charset="utf-8">
 
-<title>@@appName</title>
+<title><%= app.name %></title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-<meta name="application-name" content="@@appName">
-<meta name="description" content="@@appDescription">
-<meta name="author" content="@@authorName">
-<link rel="author" href="mailto:@@authorEmail">
-<link rel="author" href="@@authorURL" type="text/html">
+<meta name="application-name" content="<%= app.name %>">
+<meta name="description" content="<%= app.description %>">
+<meta name="author" content="<%= pkg.author.name %>">
+<link rel="author" href="mailto:<%= pkg.author.email %>">
+<link rel="author" href="<%= pkg.author.url %>" type="text/html">
 
 <link rel="icon" href="icon-16.png" sizes="16x16">
 <link rel="icon" href="icon-32.png" sizes="32x32">
@@ -19,7 +19,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="@@appName">
+<meta name="apple-mobile-web-app-title" content="<%= app.name %>">
 
 <link rel="apple-touch-icon-precomposed" sizes="512x512" href="icon.png">
 

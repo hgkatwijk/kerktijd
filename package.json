@@ -8,7 +8,7 @@
     "url": "http://hervormdegemeentekatwijk.nl"
   },
   "license": "GPLv3",
-  "description": "Wees op de hoogte van de kerkdiensten van de Hervormde Gemeente Katwijk aan Zee.",
+  "description": "HTML5 web application for Hervormde Gemeente Katwijk aan Zee",
   "directories": {
     "test": "test"
   },

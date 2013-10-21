@@ -10,6 +10,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    app: grunt.file.readJSON('app.json'),
     clean: ['build/*'],
     copy: {
       build: {
@@ -100,7 +101,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'copy:build',
-    'sass:build',
     'concat:build'
   ]);
   grunt.registerTask('build-optimize', [

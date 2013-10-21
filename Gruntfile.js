@@ -7,13 +7,17 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-replace');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     clean: ['build/*'],
     copy: {
       build: {
+        options: {
+          processContent: function (content, srcpath) {
+            return grunt.template.process(content);
+          }
+        },
         files: [
           { expand: true, cwd: 'src/', src: ['**'], dest: 'build/' }
         ]
@@ -95,7 +99,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'copy:build',
-    'replace:build',
     'sass:build',
     'concat:build'
   ]);

@@ -1,0 +1,15 @@
+<section>
+
+  <article itemscope itemtype="http://schema.org/Event">
+    <div itemprop="location">{{sermon.church}}</div>
+    <div itemprop="startDate" content="2013-10-13T10:00">{{sermon.time}}</div>
+    <div itemprop="performer">{{sermon.preacher}}</div>
+
+    <div ng-show="sermon.audio" class="audio">
+      <audio ng-src="{{sermon.audio}}" controls>
+
+      </audio>
+    </div>
+  </article>
+
+</section>

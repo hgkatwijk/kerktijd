@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="app.appcache" lang="nl" itemscope itemtype="http://schema.org/WebApplication">
+<html manifest="app.appcache" lang="nl" itemscope itemtype="http://schema.org/WebApplication" data-ng-app="hgkatwijk-kerktijd" data-ng-controller="AppCtrl">
 <meta charset="utf-8">
 
 <title><%= app.name %></title>
@@ -28,3 +28,26 @@
 <script src="app.js" async></script>
 
 <body role="application">
+
+<header role="banner">
+  <nav id="action-bar" role="menubar" class="action-bar">
+    <ul>
+      <li>
+        <img src="icon-48.png">
+      </li>
+      <li data-ng-hide="actionbar.showAppName">
+        <h1>Kerktijd</h1>
+        <p>hgkatwijk.nl</p>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main role="main" data-ng-view>
+  <section>
+    <h1><%= app.name %></h1>
+    <noscript>
+      <p>Deze web applicatie vereist Javascript.</p>
+    </noscript>
+  </section>
+</main>

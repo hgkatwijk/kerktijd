@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<header role="banner">
+  <nav class="action-bar">
+    <div>
+      <div>
+        <span class="app-icon" >
+          <img src="res/icon/android/icon-48-mdpi.png">
+        </span>
+        <span class="app-title"><h1>Kerktijd</h1><p>hgkatwijk.nl</p></span>
+      </div>
+    </div>
+  </nav>
+  <nav class="top-bar">
+    <ul>
+      <li><a ng-href="#/week/{{prev}}"><span>Week {{prev}}</span></a></li>
+      <li class="active"><a href="#/week"><span>Week {{curr}}</span></a></li>
+      <li><a href="#/week/{{next}}"><span>Week {{next}}</span></a></li>
+    </ul>
+  </nav>
+</header>
+<main role="main" ng-view>
+
+</main>

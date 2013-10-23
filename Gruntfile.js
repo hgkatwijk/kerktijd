@@ -8,24 +8,40 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
+  grunt.loadNpmTasks('grunt-bump');
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     app: grunt.file.readJSON('app.json'),
     clean: ['build/*'],
     copy: {
-      build: {
+      "build": {
         options: {
           processContent: function (content, srcpath) {
-            return grunt.template.process(content);
-          }
+            var extIndex = srcpath.lastIndexOf(".");
+            if (extIndex && /appcache|html|js/.test(srcpath.substr(extIndex + 1)))
+              return grunt.template.process(content);
+            else
+              return content;
+          },
+          processContentExclude: ['**/*.{png,gif,jpg,ico,ttf,eot,woff}']
         },
         files: [
           { expand: true, cwd: 'src/', src: ['**'], dest: 'build/' }
         ]
+      },
+      "build-dist": {
+        files: [
+          { src: ['build/index.html'], dest: 'build/dist/index.html' },
+          { src: ['build/app.appcache'], dest: 'build/dist/app.appcache' },
+          { src: ['build/app.min.css'], dest: 'build/dist/app.css' },
+          { src: ['build/app.html'], dest: 'build/dist/app.html' },
+          { src: ['build/app.min.js'], dest: 'build/dist/app.js' },
+        ]
       }
     },
     htmlmin: {
-      build: {
+      "build-min": {
         options: {
           removeComments: true,
           collapseWhitespace: true,
@@ -37,48 +53,34 @@ module.exports = function(grunt) {
         ],
       }
     },
-    replace: {
-      options: {
-        //force: true,
-        variables: {
-          appName: 'Kerktijd',
-          appDescription: 'Wees op de hoogte van de kerkdiensten van de Hervormde Gemeente Katwijk aan Zee.',
-          authorName: '<%= pkg.author.name %>',
-          authorEmail: '<%= pkg.author.email %>',
-          authorURL: '<%= pkg.author.url %>',
-          timestamp: '<%= grunt.template.today() %>',
-          version: '<%= pkg.version %>'
-        }
-      },
-      build: {
-        files: [
-          { expand: true, cwd: 'src/', src: ['**'], dest: 'build/' }
-        ]
-      }
-    },
     uglify: {
       options: {
         output: {
           max_line_len: 80
         }
       },
-      build: {
+      "build-min": {
         files: {
           'build/app.min.js': ['build/app.js']
         }
       }
     },
     sass: {
-      build: {
+      options: {
+        loadPath: [
+          'bower_components/foundation/scss'
+        ]
+      },
+      "build": {
         files: {
           'build/app.css': [
-
+            'src/app.scss'
           ]
         }
       },
     },
     cssmin: {
-      build: {
+      "build-min": {
         options: {
           keepSpecialComments: 0,
           report: true
@@ -101,12 +103,11 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'copy:build',
-    'concat:build'
+    'sass:build'
   ]);
-  grunt.registerTask('build-optimize', [
-    'htmlmin:build',
-    'uglify:build',
-    'cssmin:build'
+  grunt.registerTask('build-min', [
+    'uglify:build-min',
+    'cssmin:build-min'
   ]);
 
   grunt.registerTask('clean-build', ['clean']);

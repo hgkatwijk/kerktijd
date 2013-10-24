@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
 <meta name="application-name" content="<%= app.name %>">
+<meta name="application-url" content="/">
 <meta name="description" content="<%= app.description %>">
 <meta name="author" content="<%= pkg.author.name %>">
 <link rel="author" href="mailto:<%= pkg.author.email %>">
@@ -30,24 +31,31 @@
 <body role="application">
 
 <header role="banner">
-  <nav id="action-bar" role="menubar" class="action-bar">
-    <ul>
-      <li>
-        <img src="icon-48.png">
-      </li>
-      <li data-ng-hide="actionbar.showAppName">
+  <nav id="action-bar" class="action-bar">
+    <div>
+      <div class="app-icon">
+        <img src="icon-64.png" alt="Application icon" width="32" height="32">
+      </div>
+      <div data-ng-hide="actionbar.showAppName">
         <h1>Kerktijd</h1>
         <p>hgkatwijk.nl</p>
-      </li>
-    </ul>
+      </div>
+      <ul role="menubar" class="action-buttons">
+        <li role="menuitem">Info</li>
+        <li role="menuitem" aria-haspopup="true">
+          <button>Overflow</button>
+          <ul role="menu">
+            <li role="menuitem">New</li>
+            <li role="menuitem">Open…</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </nav>
 </header>
 
 <main role="main" data-ng-view>
   <section>
-    <h1><%= app.name %></h1>
-    <noscript>
-      <p>Deze web applicatie vereist Javascript.</p>
-    </noscript>
+    <p><noscript itemprop="browserRequirements">Deze web applicatie vereist Javascript.</noscript></p>
   </section>
 </main>

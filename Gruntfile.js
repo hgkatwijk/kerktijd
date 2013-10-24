@@ -24,10 +24,11 @@ module.exports = function(grunt) {
             else
               return content;
           },
-          processContentExclude: ['**/*.{png,gif,jpg,ico,ttf,eot,woff}']
+          processContentExclude: ['**/*.{png,gif,jpg,ico,ttf,eot,svg,woff}']
         },
         files: [
-          { expand: true, cwd: 'src/', src: ['**'], dest: 'build/' }
+          { expand: true, cwd: 'src/', src: ['**'], dest: 'build/' },
+          { expand: true, cwd: 'bower_components/roboto-fontface/fonts', src: ['Roboto-Regular.*'], dest: 'build/fonts' }
         ]
       },
       "build-dist": {

@@ -144,6 +144,14 @@ header[role=banner] {
       @include grid-column(4);
 
       text-align: center;
+
+      a {
+        color: inherit;
+        display: block;
+        font-size: em-calc(14);
+        text-decoration: none;
+        text-transform: uppercase;
+      }
     }
   }
 }
@@ -247,8 +255,41 @@ main {
   }
 }
 
+.tabpanels {
+  position: relative;
+
+  [role=tabpanel] {
+    &:before {
+      content: "";
+      display: block;
+      height: 1px;
+    }
+
+    opacity: .5;
+    left: -100%;
+    margin-left: em-calc(-16);
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    &.active {
+      left: 0;
+      margin-left: 0;
+      opacity: 1;
+      position: relative;
+
+    }
+
+    &.active + [role=tabpanel] {
+      left: 100%;
+      margin-left: em-calc(16);
+    }
+  }
+}
+
 @media #{$screen} {
   body {
+    overflow-x: hidden;
     padding-top: em-calc(48);
   }
   header[role=banner] {

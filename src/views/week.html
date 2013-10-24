@@ -1,35 +1,87 @@
-<section class="with-topbar">
+<section role="region" class="with-topbar">
   <nav class="topbar">
     <ul role="tablist">
-      <li role="tab">Week {{prev}}</li>
-      <li role="tab">Week {{curr}}</li>
-      <li role="tab">Week {{next}}</li>
+      <li role="tab"><a ng-href="#/week/{{prev}}">Week {{prev}}</a></li>
+      <li role="tab"><a ng-href="#/week/{{curr}}">Week {{curr}}</a></li>
+      <li role="tab"><a ng-href="#/week/{{next}}">Week {{next}}</a></li>
     </ul>
   </nav>
 
-  <section role="tabpanel" ng-swipe-right="gotoWeek(prev)" ng-swipe-left="gotoWeek(next)">
-    <div class="day" ng-repeat="day in sermonsByDay">
-      <h2>{{day.date}}</h2>
+  <div class="tabpanels">
+    <section role="tabpanel" ng-swipe-right="gotoWeek(prev)" ng-swipe-left="gotoWeek(next)">
+      <div class="day" ng-repeat="day in sermonsByDay">
+        <h2>{{day.date}}</h2>
 
-      <div class="location" ng-repeat="location in day.location|toArray|orderBy:'weight'">
-        <!--<h3>{{location.weight}}</h3>-->
-  <div ng-repeat="sermon in location.sermons" class="daypart">
-        <article itemscope itemtype="http://schema.org/Event">
-          <div itemprop="location"><span ng-bind="sermon.church"></span></div>
-          <div itemprop="startDate" content="2013-10-13T10:00"><span ng-bind="sermon.time"></span></div>
-          <div itemprop="performer"><span ng-bind="sermon.preacher"></span></div>
+        <div class="location" ng-repeat="location in day.location|toArray|orderBy:'weight'">
+          <!--<h3>{{location.weight}}</h3>-->
+    <div ng-repeat="sermon in location.sermons" class="daypart">
+          <article itemscope itemtype="http://schema.org/Event">
+            <div itemprop="location"><span ng-bind="sermon.church"></span></div>
+            <div itemprop="startDate" content="2013-10-13T10:00"><span ng-bind="sermon.time"></span></div>
+            <div itemprop="performer"><span ng-bind="sermon.preacher"></span></div>
 
-          <div class="audio" ng-show="sermon.audio">
-            <span>Opname</span>
+            <div class="audio" ng-show="sermon.audio">
+              <span>Opname</span>
 
-          </div>
+            </div>
 
-          <a ng-href="#/item/{{sermon.nid}}"></a>
-        </article>
-  </div>
+            <a ng-href="#/item/{{sermon.nid}}"></a>
+          </article>
+    </div>
+
+        </div>
 
       </div>
+    </section>
+    <section role="tabpanel" class="active" ng-swipe-right="gotoWeek(prev)" ng-swipe-left="gotoWeek(next)">
+      <div class="day" ng-repeat="day in sermonsByDay">
+        <h2>{{day.date}}</h2>
 
+        <div class="location" ng-repeat="location in day.location|toArray|orderBy:'weight'">
+          <!--<h3>{{location.weight}}</h3>-->
+    <div ng-repeat="sermon in location.sermons" class="daypart">
+          <article itemscope itemtype="http://schema.org/Event">
+            <div itemprop="location"><span ng-bind="sermon.church"></span></div>
+            <div itemprop="startDate" content="2013-10-13T10:00"><span ng-bind="sermon.time"></span></div>
+            <div itemprop="performer"><span ng-bind="sermon.preacher"></span></div>
+
+            <div class="audio" ng-show="sermon.audio">
+              <span>Opname</span>
+
+            </div>
+
+            <a ng-href="#/item/{{sermon.nid}}"></a>
+          </article>
     </div>
-  </section>
+
+        </div>
+
+      </div>
+    </section>
+    <section role="tabpanel" ng-swipe-right="gotoWeek(prev)" ng-swipe-left="gotoWeek(next)">
+      <div class="day" ng-repeat="day in sermonsByDay">
+        <h2>{{day.date}}</h2>
+
+        <div class="location" ng-repeat="location in day.location|toArray|orderBy:'weight'">
+          <!--<h3>{{location.weight}}</h3>-->
+    <div ng-repeat="sermon in location.sermons" class="daypart">
+          <article itemscope itemtype="http://schema.org/Event">
+            <div itemprop="location"><span ng-bind="sermon.church"></span></div>
+            <div itemprop="startDate" content="2013-10-13T10:00"><span ng-bind="sermon.time"></span></div>
+            <div itemprop="performer"><span ng-bind="sermon.preacher"></span></div>
+
+            <div class="audio" ng-show="sermon.audio">
+              <span>Opname</span>
+
+            </div>
+
+            <a ng-href="#/item/{{sermon.nid}}"></a>
+          </article>
+    </div>
+
+        </div>
+
+      </div>
+    </section>
+  </div>
 </section>

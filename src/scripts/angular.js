@@ -81,7 +81,7 @@ controller('AppCtrl', ['$scope', '$routeParams', '$http', '$location', function 
 }]).
 
 controller('WeekCtrl', ['$scope', '$routeParams', '$http', '$location', 'currentWeek', function ($scope, $routeParams, $http, $location, currentWeek) {
-  var weekNr = $routeParams.weekNr || currentWeek;
+  var weekNr = $routeParams.weekNr || parseInt(currentWeek, 10);
   if (weekNr == 'current') {
     weekNr = currentWeek;
   }
@@ -91,6 +91,7 @@ controller('WeekCtrl', ['$scope', '$routeParams', '$http', '$location', 'current
   else if (weekNr == 'next') {
     weekNr = currentWeek + 1;
   }
+  weekNr = parseInt(weekNr, 10);
 
   document.title = "Week " + weekNr + " - <%= app.name %>";
 

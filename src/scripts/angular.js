@@ -100,8 +100,16 @@ controller('WeekCtrl', ['$scope', '$routeParams', '$http', '$location', 'current
   $scope.next = $scope.curr + 1;
 
 
-  $http.
-  jsonp('https://kerkapp.hgkatwijk.nl/api/v1/week.php?week=' + weekNr + '&callback=JSON_CALLBACK').
+  $http({
+    method: 'GET', //'JSONP',
+    url: 'https://kerkapp.hgkatwijk.nl/api/v1/week.php',
+    cache: true,
+    params: {
+      //callback: 'JSON_CALLBACK',
+      week: weekNr
+    }
+  }).
+  //jsonp('https://kerkapp.hgkatwijk.nl/api/v1/week.php?week=' + weekNr + '&callback=JSON_CALLBACK').
   success(function(data) {
     var sermons = data;
 

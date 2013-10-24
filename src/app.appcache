@@ -3,6 +3,11 @@ CACHE MANIFEST
 app.css
 app.html
 app.js
+fonts/Roboto-Regular.woff
+icon-64.png
+icon.png
+views/item.html
+views/week.html
 
 NETWORK:
 *

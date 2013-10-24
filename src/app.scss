@@ -128,6 +128,26 @@ header[role=banner] {
   }
 }
 
+.topbar {
+  background: #444;
+  border-bottom: em-calc(2) solid #333;
+  color: #fff;
+  line-height: em-calc(46);
+
+  ul[role=tablist] {
+    @include grid-row;
+
+    list-style: none;
+    padding: 0;
+
+    li[role=tab] {
+      @include grid-column(4);
+
+      text-align: center;
+    }
+  }
+}
+
 main {
   @include grid-row;
 
@@ -236,5 +256,17 @@ main {
     top: 0;
     width: 100%;
     z-index: 100;
+  }
+
+  .with-topbar {
+    padding-top: em-calc(48);
+
+    .topbar {
+      margin-top: em-calc(-48);
+      left: 0;
+      position: fixed;
+      width: 100%;
+      z-index: 100;
+    }
   }
 }

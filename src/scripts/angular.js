@@ -92,6 +92,8 @@ controller('WeekCtrl', ['$scope', '$routeParams', '$http', '$location', 'current
     weekNr = currentWeek + 1;
   }
 
+  document.title = "Week " + weekNr + " - <%= app.name %>";
+
   $scope.curr = weekNr;
   $scope.prev = $scope.curr - 1;
   $scope.next = $scope.curr + 1;
@@ -157,3 +159,12 @@ controller('ItemCtrl', ['$scope', '$routeParams', '$http', function($scope, $rou
 /*angular.element(document).ready(function() {
   angular.bootstrap(document.documentElement, ['hgkatwijk-kerktijd']);
 });*/
+
+/*window.addEventListener(
+    'scroll',
+    function() {
+        document.body.scrollTop = Math.round(document.body.scrollTop / 48) * 48;
+    },
+    false
+);*/
+

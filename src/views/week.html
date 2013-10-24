@@ -1,13 +1,13 @@
-<section>
-  <nav>
-    <ul>
-      <li>Week {{prev}}</li>
-      <li>Week {{curr}}</li>
-      <li>Week {{next}}</li>
+<section class="with-topbar">
+  <nav class="topbar">
+    <ul role="tablist">
+      <li role="tab">Week {{prev}}</li>
+      <li role="tab">Week {{curr}}</li>
+      <li role="tab">Week {{next}}</li>
     </ul>
   </nav>
 
-  <section ng-swipe-right="gotoWeek(prev)" ng-swipe-left="gotoWeek(next)">
+  <section role="tabpanel" ng-swipe-right="gotoWeek(prev)" ng-swipe-left="gotoWeek(next)">
     <div class="day" ng-repeat="day in sermonsByDay">
       <h2>{{day.date}}</h2>
 

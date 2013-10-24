@@ -1,4 +1,4 @@
-<section role="region" class="with-topbar">
+<section role="region" class="with-topbar" ng-swipe-right="gotoWeek(prev)" ng-swipe-left="gotoWeek(next)">
   <nav class="topbar">
     <ul role="tablist">
       <li role="tab"><a ng-href="#/week/{{prev}}">Week {{prev}}</a></li>
@@ -8,7 +8,7 @@
   </nav>
 
   <div class="tabpanels">
-    <section role="tabpanel" ng-swipe-right="gotoWeek(prev)" ng-swipe-left="gotoWeek(next)">
+    <section role="tabpanel">
       <div class="day" ng-repeat="day in sermonsByDay">
         <h2>{{day.date}}</h2>
 
@@ -33,7 +33,7 @@
 
       </div>
     </section>
-    <section role="tabpanel" class="active" ng-swipe-right="gotoWeek(prev)" ng-swipe-left="gotoWeek(next)">
+    <section role="tabpanel" class="active">
       <div class="day" ng-repeat="day in sermonsByDay">
         <h2>{{day.date}}</h2>
 
@@ -58,7 +58,7 @@
 
       </div>
     </section>
-    <section role="tabpanel" ng-swipe-right="gotoWeek(prev)" ng-swipe-left="gotoWeek(next)">
+    <section role="tabpanel">
       <div class="day" ng-repeat="day in sermonsByDay">
         <h2>{{day.date}}</h2>
 

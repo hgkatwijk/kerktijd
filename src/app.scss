@@ -5,6 +5,7 @@
 @import "foundation/components/global";
 @import "foundation/components/grid";
 @import "foundation/components/grid-5";
+@import "foundation/components/dropdown";
 //
 
 // @import "foundation/components/visibility";
@@ -44,6 +45,12 @@
 body {
   background: #ecf0f1;
   color: #222;
+  line-height: em-calc(24);
+
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 header[role=banner] {
@@ -120,9 +127,26 @@ header[role=banner] {
 
     li[role=menuitem] {
       float: left;
+      position: relative;
 
       ul[role=menu] {
+        @include dropdown-container;
+
+        color: #333;
         display: none;
+        min-width: em-calc(240);
+        line-height: em-calc(48);
+        padding: 0;
+
+        li {
+          @include dropdown-style;
+
+          display: block;
+          float: none;
+          font-size: inherit;
+          line-height: inherit;
+          padding: 0 em-calc(8);
+        }
       }
     }
   }
@@ -161,12 +185,18 @@ main {
 
   & > section {
     @include grid-column(12);
+
+    padding-top: em-calc(12);
+    padding-bottom: em-calc(12);
   }
 
   h1,
   h2,
   h3 {
-    font-size: 1em;
+    font-size: inherit;
+    font-weight: normal;
+    line-height: em-calc(24);
+    margin: em-calc(12) 0;
   }
 
   .day {
@@ -174,8 +204,10 @@ main {
     & > h2 {
 
       color: #555;
-      font-size: 1.5em;
+      font-size: em-calc(18);
       font-style: italic;
+      line-height: em-calc(24, 18);
+      margin: em-calc(12, 18) 0;
     }
   }
 
@@ -296,7 +328,7 @@ main {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 101;
   }
 
   .with-topbar {

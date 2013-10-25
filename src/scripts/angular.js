@@ -15,7 +15,7 @@ config(['$routeProvider', '$locationProvider', function ($routeProvider, $locati
   $routeProvider.
   when('/week/:weekNr', {
     templateUrl: 'views/week.html',
-    controller: 'WeekCtrl'
+    controller: 'WeeksCtrl'
   }).
   when('/item/:itemId', {
     templateUrl: 'views/item.html',
@@ -71,16 +71,24 @@ filter('toArray', function () {
 controller('AppCtrl', ['$scope', '$routeParams', '$http', '$location', function ($scope, $routeParams, $http, $location) {
 
   $scope.gotoWeek = function(week) {
-    console.debug('Goto week ' + week);
-    $location.path('/week/' + week);
+    console.debug('Goto week ' + week + ' from "' + $location.path() + '"');
+    if ($location.path() != '/week/current') {
+      $location.path('/week/' + week).replace();
+    }
+    else {
+      $location.path('/week/' + week);
+    }
+    return false;
   };
   $scope.gotoItem = function(item) {
     console.debug('Goto item ' + item);
-    $location.path('/item/' + item);
+    $location.path('/item/' + item).replace();
+    return false;
   };
 }]).
 
-controller('WeekCtrl', ['$scope', '$routeParams', '$http', '$location', 'currentWeek', function ($scope, $routeParams, $http, $location, currentWeek) {
+
+controller('WeeksCtrl', ['$scope', '$routeParams', 'currentWeek', function ($scope, $routeParams, currentWeek) {
   var weekNr = $routeParams.weekNr || parseInt(currentWeek, 10);
   if (weekNr == 'current') {
     weekNr = currentWeek;
@@ -99,17 +107,28 @@ controller('WeekCtrl', ['$scope', '$routeParams', '$http', '$location', 'current
   $scope.prev = $scope.curr - 1;
   $scope.next = $scope.curr + 1;
 
+  $scope.weeks = [
+    { week: $scope.prev },
+    { week: $scope.curr, isActive: true },
+    { week: $scope.next },
+  ];
 
+}]).
+
+controller('WeekCtrl', ['$scope', '$http', function ($scope, $http) {
+  var weekNr = $scope.week.week;
+
+  var protocol = window.location.protocol == 'file:' ? 'http:' : '';
   $http({
-    method: 'GET', //'JSONP',
-    url: 'https://kerkapp.hgkatwijk.nl/api/v1/week.php',
+    method: 'GET',
+    //method: 'JSONP',
+    url: protocol + '//kerkapp.hgkatwijk.nl/api/v1/week.php',
     cache: true,
     params: {
       //callback: 'JSON_CALLBACK',
       week: weekNr
     }
   }).
-  //jsonp('https://kerkapp.hgkatwijk.nl/api/v1/week.php?week=' + weekNr + '&callback=JSON_CALLBACK').
   success(function(data) {
     var sermons = data;
 
@@ -155,8 +174,18 @@ controller('WeekCtrl', ['$scope', '$routeParams', '$http', '$location', 'current
 controller('ItemCtrl', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
   $scope.itemId = $routeParams.itemId;
 
-  $http.
-  jsonp('https://kerkapp.hgkatwijk.nl/api/v1/item.php?item=' + $scope.itemId + '&callback=JSON_CALLBACK').
+
+  var protocol = window.location.protocol == 'file:' ? 'http:' : '';
+  $http({
+    method: 'GET',
+    //method: 'JSONP',
+    url: protocol + '//kerkapp.hgkatwijk.nl/api/v1/item.php',
+    cache: true,
+    params: {
+      //callback: 'JSON_CALLBACK',
+      item: $scope.itemId
+    }
+  }).
   success(function(data) {
     var sermons = data;
 

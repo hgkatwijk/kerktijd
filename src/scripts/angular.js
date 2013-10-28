@@ -70,27 +70,38 @@ filter('toArray', function () {
 
 
 controller('AppCtrl', ['$scope', '$routeParams', '$http', '$location', 'currentWeek', function ($scope, $routeParams, $http, $location, currentWeek) {
+  var historyDepth = 0;
+
+  console.debug('historyDepth', historyDepth);
 
   $scope.gotoWeek = function(week) {
     if (week && week != currentWeek) {
       console.debug('Goto week ' + week + ' from "' + $location.url() + '"');
 
-      if ($location.search('week')) {
+      if (!$location.search().week) {
         $location.search('week', week);
+        historyDepth++;
+        console.debug('historyDepth', historyDepth);
       }
       else {
         $location.search('week', week).replace();
       }
     }
+    else if (historyDepth) {
+      window.history.go(-historyDepth);
+      historyDepth = 0;
+      console.debug('historyDepth', historyDepth);
+    }
     else {
       $location.url('/week');
     }
-    return false;
   };
   $scope.gotoItem = function(item) {
     console.debug('Goto item ' + item);
-    $location.path('/item/' + item).replace();
-    return false;
+
+    $location.path('/item/' + item);
+    historyDepth++;
+    console.debug('historyDepth', historyDepth);
   };
 }]).
 
@@ -98,7 +109,7 @@ controller('AppCtrl', ['$scope', '$routeParams', '$http', '$location', 'currentW
 controller('WeeksCtrl', ['$scope', '$routeParams', 'currentWeek', '$route', '$rootScope', function ($scope, $routeParams, currentWeek, $route, $rootScope) {
   var weekNr = parseInt($routeParams.week || currentWeek, 10);
 
-  document.title = "Week " + weekNr + " - <%= app.name %>";
+  document.title = "<%= app.name %>";
 
   $scope.curr = weekNr;
   $scope.prev = $scope.curr - 1;
@@ -110,11 +121,10 @@ controller('WeeksCtrl', ['$scope', '$routeParams', 'currentWeek', '$route', '$ro
   $scope.weeks[$scope.next] = { week: $scope.next };
 
   $rootScope.$on('$routeUpdate', function(event, current) {
-    console.log(current);
     var weekNr = parseInt(current.params.week || currentWeek, 10);
 
     if (weekNr == currentWeek) {
-      document.title = "Deze week - <%= app.name %>";
+      document.title = "<%= app.name %>";
     }
     else {
       document.title = "Week " + weekNr + " - <%= app.name %>";
@@ -228,4 +238,9 @@ controller('ItemCtrl', ['$scope', '$routeParams', '$http', function($scope, $rou
     },
     false
 );*/
+
+/* Webkit bug: https://code.google.com/p/chromium/issues/detail?id=116655 */
+window.addEventListener('scroll', function() {
+  if (document.body.scrollLeft) document.body.scrollLeft = 0;
+}, false);
 

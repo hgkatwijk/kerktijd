@@ -5,7 +5,7 @@ module('hgkatwijk-kerktijd', ['ngRoute', 'ngTouch']).
 config(['$sceDelegateProvider', function($sceDelegateProvider) {
   $sceDelegateProvider.resourceUrlWhitelist([
     'self',
-    'http://diensten.hgkatwijk.nl/*'
+    'http://diensten.hgkatwijk.nl/**'
   ]);
 }]).
 
@@ -13,16 +13,17 @@ config(['$routeProvider', '$locationProvider', function ($routeProvider, $locati
   //$locationProvider.html5Mode(true);
 
   $routeProvider.
-  when('/week/:weekNr', {
+  when('/week', {
     templateUrl: 'views/week.html',
-    controller: 'WeeksCtrl'
+    controller: 'WeeksCtrl',
+    reloadOnSearch: false
   }).
   when('/item/:itemId', {
     templateUrl: 'views/item.html',
     controller: 'ItemCtrl'
   }).
   otherwise({
-    redirectTo: '/week/current'
+    redirectTo: '/week'
   });
 }]).
 
@@ -68,15 +69,21 @@ filter('toArray', function () {
 }).
 
 
-controller('AppCtrl', ['$scope', '$routeParams', '$http', '$location', function ($scope, $routeParams, $http, $location) {
+controller('AppCtrl', ['$scope', '$routeParams', '$http', '$location', 'currentWeek', function ($scope, $routeParams, $http, $location, currentWeek) {
 
   $scope.gotoWeek = function(week) {
-    console.debug('Goto week ' + week + ' from "' + $location.path() + '"');
-    if ($location.path() != '/week/current') {
-      $location.path('/week/' + week).replace();
+    if (week && week != currentWeek) {
+      console.debug('Goto week ' + week + ' from "' + $location.url() + '"');
+
+      if ($location.search('week')) {
+        $location.search('week', week);
+      }
+      else {
+        $location.search('week', week).replace();
+      }
     }
     else {
-      $location.path('/week/' + week);
+      $location.url('/week');
     }
     return false;
   };
@@ -88,18 +95,8 @@ controller('AppCtrl', ['$scope', '$routeParams', '$http', '$location', function 
 }]).
 
 
-controller('WeeksCtrl', ['$scope', '$routeParams', 'currentWeek', function ($scope, $routeParams, currentWeek) {
-  var weekNr = $routeParams.weekNr || parseInt(currentWeek, 10);
-  if (weekNr == 'current') {
-    weekNr = currentWeek;
-  }
-  else if (weekNr == 'prev') {
-    weekNr = currentWeek - 1;
-  }
-  else if (weekNr == 'next') {
-    weekNr = currentWeek + 1;
-  }
-  weekNr = parseInt(weekNr, 10);
+controller('WeeksCtrl', ['$scope', '$routeParams', 'currentWeek', '$route', '$rootScope', function ($scope, $routeParams, currentWeek, $route, $rootScope) {
+  var weekNr = parseInt($routeParams.week || currentWeek, 10);
 
   document.title = "Week " + weekNr + " - <%= app.name %>";
 
@@ -107,11 +104,37 @@ controller('WeeksCtrl', ['$scope', '$routeParams', 'currentWeek', function ($sco
   $scope.prev = $scope.curr - 1;
   $scope.next = $scope.curr + 1;
 
-  $scope.weeks = [
-    { week: $scope.prev },
-    { week: $scope.curr, isActive: true },
-    { week: $scope.next },
-  ];
+  $scope.weeks = {};
+  $scope.weeks[$scope.prev] = { week: $scope.prev };
+  $scope.weeks[$scope.curr] = { week: $scope.curr, isActive: true };
+  $scope.weeks[$scope.next] = { week: $scope.next };
+
+  $rootScope.$on('$routeUpdate', function(event, current) {
+    console.log(current);
+    var weekNr = parseInt(current.params.week || currentWeek, 10);
+
+    if (weekNr == currentWeek) {
+      document.title = "Deze week - <%= app.name %>";
+    }
+    else {
+      document.title = "Week " + weekNr + " - <%= app.name %>";
+    }
+
+    delete $scope.weeks[$scope.curr].isActive;
+
+    $scope.curr = weekNr;
+    $scope.prev = $scope.curr - 1;
+    $scope.next = $scope.curr + 1;
+
+    $scope.weeks[$scope.curr].isActive = true;
+
+    if (!$scope.weeks[$scope.prev]) {
+      $scope.weeks[$scope.prev] = { week: $scope.prev };
+    }
+    if (!$scope.weeks[$scope.next]) {
+      $scope.weeks[$scope.next] = { week: $scope.next };
+    }
+  });
 
 }]).
 

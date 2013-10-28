@@ -38,6 +38,10 @@ module.exports = function(grunt) {
           { src: ['build/app.min.css'], dest: 'build/dist/app.css' },
           { src: ['build/app.html'], dest: 'build/dist/app.html' },
           { src: ['build/app.min.js'], dest: 'build/dist/app.js' },
+          { src: ['build/favicon.ico'], dest: 'build/dist/favicon.ico' },
+          { expand: true, cwd: 'build/', src: ['icon*'], dest: 'build/dist/' },
+          { expand: true, cwd: 'build/fonts/', src: ['*'], dest: 'build/dist/fonts/' },
+          { expand: true, cwd: 'build/views-min/', src: ['*'], dest: 'build/dist/views/' },
         ]
       }
     },
@@ -50,7 +54,7 @@ module.exports = function(grunt) {
           removeOptionalTags: true
         },
         files: [
-          { expand: true, cwd: 'build/tpl/', src: ['**/*.html'], dest: 'build/tpl-min', ext: '.html' }
+          { expand: true, cwd: 'build/views/', src: ['**/*.html'], dest: 'build/views-min', ext: '.html' }
         ],
       }
     },
@@ -108,7 +112,8 @@ module.exports = function(grunt) {
   ]);
   grunt.registerTask('build-min', [
     'uglify:build-min',
-    'cssmin:build-min'
+    'cssmin:build-min',
+    'htmlmin:build-min'
   ]);
 
   grunt.registerTask('clean-build', ['clean']);

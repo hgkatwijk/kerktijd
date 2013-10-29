@@ -22,6 +22,9 @@ config(['$routeProvider', '$locationProvider', function ($routeProvider, $locati
     templateUrl: 'views/item.html',
     controller: 'ItemCtrl'
   }).
+  when('/info', {
+    templateUrl: 'views/info.html'
+  }).
   otherwise({
     redirectTo: '/week'
   });

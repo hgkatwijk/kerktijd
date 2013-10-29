@@ -136,15 +136,40 @@ header[role=banner] {
     li[role=tab] {
       @include grid-column(4);
 
+      border-left: 1px solid #fff;
+      height: em-calc(16);
+      margin: em-calc(15) 0;
+      padding: 0;
       text-align: center;
+
+      &:first-child {
+        border: none;
+      }
 
       a {
         color: inherit;
         display: block;
         font-size: em-calc(14);
+        height: em-calc(48, 14);
+        margin: em-calc(-15, 14) -1px 0;
         text-decoration: none;
         text-transform: uppercase;
+
+        &.active,
+        &:focus,
+        &:hover {
+          border-bottom: em-calc(5, 14) solid #fff;
+          outline: none;
+        }
       }
+    }
+
+    &:hover li a.active {
+      border: none;
+    }
+    &:hover li a.active:focus,
+    &:hover li a.active:hover {
+      border: none;
     }
   }
 }
@@ -286,6 +311,18 @@ main {
       margin-left: em-calc(16);
     }
   }
+}
+
+.tabpanels [role=tabpanel] a {
+  display: none;
+}
+.tabpanels [role=tabpanel].active a {
+  display: block;
+}
+.tabpanels [role=tabpanel].active a:focus,
+.tabpanels [role=tabpanel].active a:hover {
+  background: rgba(0, 0, 0, .1);
+  outline: none;
 }
 
 @media #{$screen} {

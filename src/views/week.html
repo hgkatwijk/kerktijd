@@ -1,9 +1,9 @@
 <section role="region" class="with-topbar" ng-swipe-right="gotoWeek(prev)" ng-swipe-left="gotoWeek(next)">
   <nav class="topbar">
     <ul role="tablist">
-      <li role="tab"><a ng-click="gotoWeek(prev)">Week {{prev}}</a></li>
-      <li role="tab"><a ng-href="/week?week={{curr}}">Week {{curr}}</a></li>
-      <li role="tab"><a ng-click="gotoWeek(next)">Week {{next}}</a></li>
+      <li role="tab"><a ng-click="gotoWeek(prev)" tabindex="0">Week {{prev}}</a></li>
+      <li role="tab"><a ng-href="/week?week={{curr}}" class="active">Week {{curr}}</a></li>
+      <li role="tab"><a ng-click="gotoWeek(next)" tabindex="0">Week {{next}}</a></li>
     </ul>
   </nav>
 

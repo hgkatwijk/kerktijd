@@ -1,0 +1,35 @@
+{
+  "name": "hgkatwijk-kerktijd",
+  "version": "0.1.0",
+  "private": true,
+  "author": {
+    "name": "Hervormde Gemeente Katwijk aan Zee",
+    "email": "admin@hervormdegemeentekatwijk.nl",
+    "url": "http://hervormdegemeentekatwijk.nl"
+  },
+  "license": "GPLv3",
+  "description": "HTML5 web application for Hervormde Gemeente Katwijk aan Zee",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "grunt test --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:hgkatwijk/kerktijd.git"
+  },
+  "devDependencies": {
+    "bower": "~1.2.7",
+    "grunt": "~0.4.1",
+    "grunt-bump": "0.0.11",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-sass": "~0.5.0",
+    "grunt-contrib-htmlmin": "~0.1.3",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-cssmin": "~0.6.2",
+    "grunt-fontello": "~0.1.1"
+  }
+}

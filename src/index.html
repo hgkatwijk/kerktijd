@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html manifest="app.appcache" lang="nl" itemscope itemtype="http://schema.org/WebApplication" data-ng-app="hgkatwijk-kerktijd" data-ng-controller="AppCtrl">
+<meta charset="utf-8">
+
+<title><%= app.name %></title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+<meta name="application-name" content="<%= app.name %>">
+<meta name="application-url" content="/">
+<meta name="description" content="<%= app.description %>">
+<meta name="author" content="<%= pkg.author.name %>">
+<link rel="author" href="mailto:<%= pkg.author.email %>">
+<link rel="author" href="<%= pkg.author.url %>" type="text/html">
+
+<link rel="icon" href="icon-16.png" sizes="16x16">
+<link rel="icon" href="icon-32.png" sizes="32x32">
+<link rel="icon" href="icon.svg" sizes="any" type="image/svg+xml">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="<%= app.name %>">
+
+<link rel="apple-touch-icon-precomposed" sizes="512x512" href="icon.png">
+
+<link rel="stylesheet" href="app.css">
+
+<script src="app.js" async></script>
+
+<body role="application">
+
+<header role="banner">
+  <nav id="action-bar" class="action-bar">
+    <div>
+      <div class="app-icon">
+        <img src="icon-64.png" alt="Application icon" width="32" height="32">
+      </div>
+      <div data-ng-hide="actionbar.showAppName">
+        <h1>Kerktijd</h1>
+        <p>hgkatwijk.nl</p>
+      </div>
+      <ul role="menubar" class="action-buttons">
+        <li role="menuitem"><a data-ng-click="gotoWeek()">Week</a></li>
+        <li role="menuitem">Info</li>
+        <li role="menuitem" aria-haspopup="true">
+          <button>Overflow</button>
+          <ul role="menu">
+            <li role="menuitem">New</li>
+            <li role="menuitem">Open…</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main role="main" data-ng-view>
+  <section>
+    <p><noscript itemprop="browserRequirements">Deze web applicatie vereist Javascript.</noscript></p>
+  </section>
+</main>

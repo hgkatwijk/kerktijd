@@ -62,11 +62,9 @@ header[role=banner] {
     }
 
     a {
+      color: inherit;
       display: block;
       font-size: 2em;
-    }
-    a.active {
-      border-bottom: .4em solid #fff;
     }
 
     button {
@@ -80,6 +78,14 @@ header[role=banner] {
       line-height: inherit;
       margin: 0;
       padding: 0;
+    }
+
+    a:focus,
+    a:hover,
+    button:focus,
+    button:hover {
+      background: rgba(255, 255, 255, .2);
+      outline: none;
     }
   }
 

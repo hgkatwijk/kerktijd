@@ -61,19 +61,26 @@ header[role=banner] {
       }
     }
 
-    a {
 
-      color: #fff;
-      font-size: 1.1em;
-      line-height: 2.4em;
-      text-decoration: none;
-      position: relative;
-      padding-bottom: .2em;
-      text-align: center;
-      top: .2em;
+    a {
+      display: block;
+      font-size: 2em;
     }
     a.active {
       border-bottom: .4em solid #fff;
+    }
+
+    button {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      border: none;
+      color: inherit;
+      display: block;
+      font-size: 2em;
+      line-height: inherit;
+      margin: 0;
+      padding: 0;
     }
   }
 

@@ -115,6 +115,9 @@ module.exports = function(grunt) {
     'cssmin:build-min',
     'htmlmin:build-min'
   ]);
+  grunt.registerTask('build-dist', [
+    'copy:build-dist'
+  ]);
 
   grunt.registerTask('clean-build', ['clean']);
 

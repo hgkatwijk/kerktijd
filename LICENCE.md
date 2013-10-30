@@ -1,4 +1,5 @@
 Kerktijd
+
 Copyright (C) 2013  Hervormde Gemeente Katwijk aan Zee
 
 This program is free software: you can redistribute it and/or modify

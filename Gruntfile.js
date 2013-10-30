@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         options: {
           processContent: function (content, srcpath) {
             var extIndex = srcpath.lastIndexOf(".");
-            if (extIndex && /appcache|html|js/.test(srcpath.substr(extIndex + 1)))
+            if (extIndex && /appcache|html|txt|js/.test(srcpath.substr(extIndex + 1)))
               return grunt.template.process(content);
             else
               return content;
@@ -41,6 +41,7 @@ module.exports = function(grunt) {
           { src: ['build/app.html'], dest: 'build/dist/app.html' },
           { src: ['build/app.min.js'], dest: 'build/dist/app.js' },
           { src: ['build/favicon.ico'], dest: 'build/dist/favicon.ico' },
+          { src: ['build/licence.txt'], dest: 'build/dist/licence.txt' },
           { expand: true, cwd: 'build/', src: ['icon*'], dest: 'build/dist/' },
           { expand: true, cwd: 'build/fonts/', src: ['*'], dest: 'build/dist/fonts/' },
           { expand: true, cwd: 'build/views-min/', src: ['*'], dest: 'build/dist/views/' },

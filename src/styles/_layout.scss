@@ -65,6 +65,7 @@ header[role=banner] {
       color: inherit;
       display: block;
       font-size: 2em;
+      text-decoration: none;
     }
 
     button {
@@ -103,9 +104,18 @@ header[role=banner] {
 
         color: #333;
         display: none;
+        font-size: em-calc($em-base);
         min-width: em-calc(240);
-        line-height: em-calc(48);
+        line-height: em-calc(48, $em-base);
         padding: 0;
+
+        right: 0;
+
+        &:before,
+        &:after {
+          left: auto;
+          right: em-calc(14);
+        }
 
         li {
           @include dropdown-style;
@@ -115,6 +125,11 @@ header[role=banner] {
           font-size: inherit;
           line-height: inherit;
           padding: 0 em-calc(8);
+
+          a {
+            font-size: inherit;
+            padding: 0;
+          }
         }
       }
     }
@@ -223,6 +238,10 @@ main {
     padding-top: .5em;
     padding-bottom: .5em;
     position: relative;
+
+    & > section {
+      @include grid-column(12);
+    }
 
     /*img {
       @include grid-column(3);

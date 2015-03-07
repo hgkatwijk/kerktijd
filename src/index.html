@@ -39,17 +39,15 @@
         <img src="icon-64.png" alt="Application icon" width="32" height="32">
       </div>
       <div data-ng-hide="actionbar.showAppName">
-        <h1>Kerktijd</h1>
+        <h1><%= app.name %></h1>
         <p>hgkatwijk.nl</p>
       </div>
       <ul role="menubar" class="action-buttons">
         <li role="menuitem"><a data-ng-click="gotoWeek()" tabindex="0"><i class="icon-clock"></i></a></li>
-        <li role="menuitem"><a href="#/info"><i class="icon-info"></i></a></li>
         <li role="menuitem" aria-haspopup="true">
           <button><i class="icon-ellipsis-vert"></i></button>
           <ul role="menu">
-            <li role="menuitem">New</li>
-            <li role="menuitem">Open…</li>
+            <li role="menuitem"><a href="#/info"><i class="icon-info"></i> <span>Over <%= app.name %></span></a></li>
           </ul>
         </li>
       </ul>

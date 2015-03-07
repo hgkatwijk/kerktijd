@@ -2,3 +2,9 @@
 .tabpanels [role=tabpanel] {
   transition: left .5s, opacity .5s;
 }
+
+[role=menuitem][aria-haspopup=true] button:active + [role=menu],
+[role=menuitem][aria-haspopup=true] [role=menu]:hover {
+  display: block !important;
+  top: auto !important;
+}

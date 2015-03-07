@@ -1,7 +1,19 @@
 <section role="region">
 
   <article itemscope itemtype="http://schema.org/AboutPage">
-    <p>Kerktijd is een applicatie van de Hervormde Gemeente Katwijk aan Zee.</p>
+    <section>
+      <p>Kerktijd is een applicatie van <span><%= pkg.author.name %></span>.</p>
+    </section>
+
+    <section>
+      <dl>
+        <dt>Versie</dt>
+        <dt itemprop="version"><%= pkg.version %></dt>
+        <dt>Licentie</dt>
+        <dt><%= pkg.license %></dt>
+      </dl>
+    </section>
+
   </article>
 
 </section>
